@@ -1,0 +1,8 @@
+Helping Hands - InfinityFree Upload Package
+
+IMPORTANT:
+1. Upload ALL files in this folder directly into your InfinityFree htdocs folder.
+2. Make sure index.php is directly inside htdocs.
+3. Configure config.php with your InfinityFree MySQL credentials.
+4. Import schema.sql into the correct MySQL database.
+5. Do not upload this folder itself as a subfolder inside htdocs.

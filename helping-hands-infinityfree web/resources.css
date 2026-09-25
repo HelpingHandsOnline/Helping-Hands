@@ -1,0 +1,83 @@
+/* ==========================================================================
+   RESOURCES PAGE — page-specific styles.
+   Requires common.css to be loaded first (variables, header, footer, hero,
+   grid4/category, stats-band, faq, cta are all defined there).
+   ========================================================================== */
+
+.hero{background:linear-gradient(120deg,var(--cream),#fffdf9 58%,#edf6f5)}
+
+/* Category strip intro spacing */
+.categories-wrap{padding-top:0}
+
+/* Filter / search bar */
+.resource-toolbar{max-width:900px;margin:-12px auto 30px;display:flex;flex-direction:column;gap:16px}
+.resource-search{display:flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:var(--shadow-sm)}
+.resource-search input{flex:1;border:0;outline:0;padding:10px 12px;font-size:11px;background:transparent}
+.resource-search button{border:0;background:var(--teal);color:#fff;border-radius:8px;padding:10px 16px;font-size:10px;font-weight:800;cursor:pointer}
+.filter-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{border:1px solid var(--line);background:#fff;color:var(--teal-dark);font-size:10px;font-weight:800;padding:9px 15px;border-radius:999px;cursor:pointer;transition:.2s}
+.chip:hover{border-color:var(--orange)}
+.chip.active{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* Resource cards */
+.resources-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.resource-card{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow-sm);transition:.25s;display:flex;flex-direction:column}
+.resource-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.resource-card img{width:100%;height:125px;object-fit:cover}
+.resource-body{padding:13px;display:flex;flex-direction:column;flex:1}
+.tag{display:inline-block;padding:4px 7px;border-radius:6px;background:var(--orange-soft);color:var(--orange);font-size:8px;font-weight:800;align-self:flex-start}
+.resource-body h3{font-size:12px;color:var(--teal-dark);margin:8px 0 5px}
+.resource-body p{font-size:10px;color:var(--muted);line-height:1.45;flex:1}
+.card-btn{margin-top:12px;width:100%;padding:8px;border:0;border-radius:6px;background:var(--teal);color:#fff;font-size:9px;font-weight:800;cursor:pointer}
+.card-btn.orange{background:var(--orange)}
+.filter-empty{display:none;text-align:center;padding:28px;color:var(--muted);font-size:12px}
+
+/* Image story */
+.image-story{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+.story-main,.story-small{position:relative;overflow:hidden;border-radius:20px;box-shadow:var(--shadow);min-height:320px}
+.story-main img,.story-small img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.story-main:hover img,.story-small:hover img{transform:scale(1.04)}
+.story-small{min-height:150px}
+.story-small+.story-small{margin-top:22px}
+.story-stack{display:grid;grid-template-rows:1fr 1fr;gap:0}
+.story-overlay{position:absolute;left:0;right:0;bottom:0;padding:24px;background:linear-gradient(transparent,rgba(0,35,37,.82));color:#fff}
+.story-overlay span{font-size:9px;color:#ffb06f;font-weight:800;letter-spacing:1px}
+.story-overlay h3{font-size:20px;line-height:1.2;margin-top:4px}
+.story-overlay p{font-size:10px;color:#e1eded;margin-top:4px}
+
+/* Newsletter */
+.newsletter{background:linear-gradient(135deg,var(--teal-dark),#006466);border-radius:20px;padding:30px 35px;color:#fff;display:flex;align-items:center;gap:25px;box-shadow:var(--shadow);flex-wrap:wrap}
+.newsletter-copy{flex:1;min-width:220px}
+.newsletter-copy span{font-size:9px;color:#ffad70;font-weight:800;letter-spacing:1px}
+.newsletter-copy h3{font-size:22px;margin:3px 0}
+.newsletter-copy p{font-size:10px;color:#c8dddd}
+.newsletter-form{display:flex;gap:7px;min-width:340px;flex:1}
+.newsletter-form input{flex:1;border:0;border-radius:8px;padding:12px;font-size:10px;outline:0}
+.newsletter-form button{border:0;border-radius:8px;background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:0 17px;cursor:pointer}
+
+/* Resource detail modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(9,30,32,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:2000}
+.modal-backdrop.open{display:flex}
+.modal-card{background:#fff;border-radius:18px;max-width:460px;width:100%;padding:28px;box-shadow:var(--shadow);position:relative}
+.modal-close{position:absolute;top:14px;right:14px;border:0;background:#f2ece0;width:32px;height:32px;border-radius:50%;cursor:pointer;color:var(--teal-dark)}
+.modal-card .tag{margin-bottom:10px}
+.modal-card h3{font-size:19px;color:var(--teal-dark);margin-bottom:10px}
+.modal-card p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:18px}
+
+@media(max-width:850px){
+  .image-story{grid-template-columns:1fr}
+  .newsletter{flex-direction:column;align-items:stretch}
+  .newsletter-form{min-width:0}
+}
+@media(max-width:700px){
+  .resources-grid{grid-template-columns:1fr}
+}
+@media(max-width:1050px){
+  .resources-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .newsletter-form{flex-direction:column}
+  .newsletter-form button{padding:11px}
+  .story-main{min-height:260px}
+  .story-small{min-height:170px}
+}

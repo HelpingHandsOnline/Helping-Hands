@@ -1,0 +1,156 @@
+HELPING HANDS — INFINITYFREE DEPLOYMENT GUIDE
+==============================================
+
+This package is prepared for a live InfinityFree PHP/MySQL deployment.
+
+IMPORTANT:
+- Upload the CONTENTS of this folder directly into your domain's htdocs folder.
+- Do not upload the folder itself inside htdocs if you want the website at the main domain.
+- The live database credentials are NOT included. You must enter your own InfinityFree credentials in config.php.
+
+1. CREATE / OPEN YOUR INFINITYFREE HOSTING ACCOUNT
+---------------------------------------------------
+Create or open your website in the InfinityFree client area.
+Make sure the domain/subdomain is active before testing the site.
+
+2. CREATE THE MYSQL DATABASE
+----------------------------
+In the InfinityFree control panel:
+- Open MySQL Databases.
+- Create a new database.
+- Record ALL four values shown by InfinityFree:
+  Database Hostname
+  Database Name
+  Database Username
+  Database Password
+
+Do not use:
+  localhost
+  root
+  a blank password
+
+InfinityFree uses its own MySQL server details.
+
+3. IMPORT THE DATABASE TABLES
+------------------------------
+- Open phpMyAdmin for the database you created.
+- Select the database.
+- Open the Import tab.
+- Choose schema.sql from this package.
+- Start the import.
+- Confirm that these tables appear:
+  users
+  requests
+  volunteers
+  contact_messages
+  newsletter_subscribers
+
+4. EDIT config.php BEFORE UPLOADING / BEFORE TESTING
+-----------------------------------------------------
+Open config.php in Notepad++ or another code editor.
+Replace these four placeholders:
+
+const DB_HOST = 'REPLACE_WITH_INFINITYFREE_DB_HOST';
+const DB_NAME = 'REPLACE_WITH_INFINITYFREE_DB_NAME';
+const DB_USER = 'REPLACE_WITH_INFINITYFREE_DB_USER';
+const DB_PASS = 'REPLACE_WITH_INFINITYFREE_DB_PASSWORD';
+
+Use the exact values shown in your InfinityFree hosting panel.
+Do not add extra spaces or change the quotation marks.
+
+5. UPLOAD THE WEBSITE
+---------------------
+Recommended method: FileZilla FTP.
+
+Connect using the FTP details shown by InfinityFree.
+Then open the website's htdocs folder.
+Upload ALL files and folders from this package directly into htdocs.
+
+The htdocs folder should contain index.php directly, not:
+htdocs/helping-hands/index.php
+
+Correct:
+htdocs/index.php
+htdocs/config.php
+htdocs/login.php
+htdocs/signup.php
+...
+
+6. OPEN THE WEBSITE
+--------------------
+Open your domain/subdomain in a browser.
+The main page should load from index.php.
+
+7. TEST THE COMPLETE SYSTEM
+----------------------------
+Test in this order:
+A. Open homepage.
+B. Create a new account.
+C. Log in.
+D. Submit a help request.
+E. Check phpMyAdmin -> requests to confirm the row was saved.
+F. Submit a volunteer application.
+G. Check phpMyAdmin -> volunteers.
+H. Send a contact message.
+I. Check phpMyAdmin -> contact_messages.
+J. Subscribe to the newsletter.
+K. Check phpMyAdmin -> newsletter_subscribers.
+L. Log out.
+
+8. SECURITY
+-----------
+The following local diagnostic pages were intentionally NOT included in this live package:
+- setup_local.php
+- database_check.php
+- view-data.php
+
+This is deliberate. They expose database/setup information and are better kept for local development/testing.
+
+9. IF YOU GET A DATABASE ERROR
+------------------------------
+Check config.php first.
+The most common problem is using localhost/root from XAMPP instead of the InfinityFree database credentials.
+
+10. IF YOU GET A 404 / 403 ERROR
+--------------------------------
+Confirm:
+- index.php is directly inside htdocs.
+- File names are lowercase where expected.
+- .htaccess is directly inside htdocs.
+- The domain is pointing to this hosting account.
+- If the domain was newly created, allow time for DNS/domain activation.
+
+11. FINAL PROJECT CHECK
+-----------------------
+Before submitting your assignment, take screenshots of:
+- Home page
+- Sign-up
+- Successful login/account page
+- Help request form
+- Successful request submission
+- Volunteer form
+- Successful volunteer submission
+- phpMyAdmin showing saved records
+- Contact form / confirmation
+- Responsive/mobile view if required
+
+These screenshots can be placed into your Testing Evidence document.
+
+IMPORTANT NOTE
+--------------
+This package contains the website code and database structure, but it cannot contain your personal InfinityFree database password. You must enter those credentials yourself.
+
+
+DATABASE IMPORT ERROR FIX — ERROR 1005 / ERRNO 150
+-------------------------------------------------
+If phpMyAdmin shows:
+  #1005 - Can't create table ... volunteers (errno: 150)
+  Foreign key constraint is incorrectly formed
+
+this normally means the existing users table was created earlier with a different column type/storage engine, so CREATE TABLE IF NOT EXISTS did not replace it.
+
+For a fresh installation, use the included schema.sql. It first removes only the five Helping Hands tables and then recreates them consistently using InnoDB and matching INT UNSIGNED user IDs.
+
+IMPORTANT: Running schema.sql again on a live site will delete data in those five tables. Use it only for initial setup or when you intentionally want to reset the database.
+
+If you have already collected real user data, stop and ask for help before importing the fresh-install schema.
